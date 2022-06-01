@@ -1,0 +1,12 @@
+{
+    "general": {
+        "back": "Back"
+    },
+    "bottom_tabs": {
+        "home": "Home",
+        "search": "Search"
+    },
+    "products": {
+        "empty": "Nothing found"
+    }
+}
