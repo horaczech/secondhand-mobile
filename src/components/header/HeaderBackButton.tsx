@@ -4,14 +4,14 @@ import {COLORS} from '../../constants/Colors';
 import {m} from '../../utils/style-helpers';
 import {NavigationProp} from '@react-navigation/native';
 import BackIcon from '@assets/images/back.svg';
-import {DEFAULT_MARGINS} from '../../constants/style';
+import {DEFAULT_OFFSETS} from '../../constants/style';
 
 interface Props {
     navigation: NavigationProp<''>;
     label: string;
 }
 
-const HeaderBackButton = ({navigation, label}: Props) => {
+const HeaderBackButton: React.FC<Props> = ({navigation, label}) => {
     return (
         <Pressable onPress={() => navigation.goBack()} style={styles.button}>
             <BackIcon width={24} height={24} stroke={COLORS.background} />
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: DEFAULT_MARGINS.small,
+        paddingLeft: DEFAULT_OFFSETS.small,
     },
     text: {
         color: COLORS.background,

@@ -21,3 +21,14 @@ export const DARK_COLORS: ThemeColorsType = {
     loadingSpinner: 'rgba(255, 255, 255, 0.75)',
     invisibleBorder: 'rgb(10, 10, 10)',
 };
+
+export const DARK_COLORS_ALT: ThemeColorsType = {
+    primary: 'rgb(53, 126, 90)',
+    background: '#1a1a1a',
+    separator: 'rgba(255, 255, 255, 0.2)',
+    text: '#fff',
+    bottomIcon: 'rgba(255, 255, 255, 0.75)',
+    lightGrey: 'rgba(255, 255, 255, 0.17)',
+    loadingSpinner: 'rgba(255, 255, 255, 0.75)',
+    invisibleBorder: 'rgb(10, 10, 10)',
+};

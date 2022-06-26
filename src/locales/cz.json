@@ -1,12 +1,14 @@
 {
     "general": {
-        "back": "Zpět"
+        "back": "Zpět",
+        "search": "Vyhledat"
     },
     "bottom_tabs": {
         "home": "Domů",
         "search": "Vyhledat"
     },
     "products": {
-        "empty": "Nic nebylo nalezeno"
+        "empty": "Nic nebylo nalezeno",
+        "author": "Autor"
     }
 }

@@ -16,3 +16,5 @@ export const shortenText = (text: string, maxLength: number) => {
     }
     return `${text.split('').slice(0, maxLength).join('')}...`;
 };
+
+export const lowerCaseText = (text: string) => text.toLowerCase();

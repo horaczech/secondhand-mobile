@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
-import {BREAKPOINTS, DEFAULT_MARGINS, LINE_HEIGHTS, OPACITIES, RADIUSES} from '../../constants/style';
+import {BREAKPOINTS, DEFAULT_OFFSETS, LINE_HEIGHTS, OPACITIES, RADIUSES} from '../../constants/style';
 import {screenWidth} from '../../utils/screen';
 import {globalStyles} from '../../styles/global';
 import {m} from '../../utils/style-helpers';
@@ -16,9 +16,10 @@ interface Props {
     product: ProductType;
     onPress?: (x?: any, y?: any) => void;
     firstItem?: boolean;
+    lastItem?: boolean;
 }
 
-const ProductsListItem = ({product, onPress, firstItem}: Props) => {
+const ProductsListItem: React.FC<Props> = ({product, onPress, firstItem, lastItem}) => {
     const {activeTheme} = useSelector((state: StoreProps) => state.theme);
 
     const shortDescription = () => {
@@ -44,6 +45,8 @@ const ProductsListItem = ({product, onPress, firstItem}: Props) => {
                 globalStyles.alignCenter,
                 {borderTopWidth: !firstItem ? 1 : 0},
                 {borderTopColor: activeTheme.colors.separator},
+                {borderBottomColor: activeTheme.colors.separator},
+                {borderBottomWidth: firstItem && lastItem ? 1 : 0},
             ]}
             onPress={onPress}>
             {isValidUri(product.image) ? (
@@ -69,7 +72,7 @@ export default ProductsListItem;
 
 const styles = StyleSheet.create({
     container: {
-        padding: screenWidth() < BREAKPOINTS.basic ? DEFAULT_MARGINS.small : DEFAULT_MARGINS.medium,
+        padding: screenWidth() < BREAKPOINTS.basic ? DEFAULT_OFFSETS.small : DEFAULT_OFFSETS.medium,
         height: 100,
     },
     image: {

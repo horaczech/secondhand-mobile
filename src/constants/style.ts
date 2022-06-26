@@ -1,10 +1,10 @@
-import {DefaultMarginsType} from '../ts/types';
+import {DefaultOffsetsType} from '../ts/types';
 
-export const DEFAULT_MARGINS: DefaultMarginsType = {
+export const DEFAULT_OFFSETS: DefaultOffsetsType = {
     small: 5,
     medium: 10,
     large: 15,
-    xxl: 20,
+    xl: 20,
 };
 
 export const BREAKPOINTS = {
@@ -38,4 +38,8 @@ export const RADIUSES = {
 
 export const OPACITIES = {
     pressable: 0.8,
+};
+
+export const ICON_SIZES = {
+    medium: 28,
 };

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {FlatList, RefreshControl, StyleProp, StyleSheet, ViewStyle} from 'react-native';
+import React, {Ref, useState} from 'react';
+import {FlatList, Keyboard, RefreshControl, StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import ProductsListItem from './ProductsListItem';
 import {useDispatch, useSelector} from 'react-redux';
-import {ProductType} from '../../ts/types';
+import {MainStackParamList, ProductType} from '../../ts/types';
 import {setActiveProduct} from '../../app/productsSlice';
-import {useNavigation} from '@react-navigation/native';
-import CategoriesBar from './categories-bar';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import ProductsListHeader from './ProductsListHeader';
 import Text from '../ui/Text';
 import {useTranslation} from 'react-i18next';
 import {m} from '../../utils/style-helpers';
@@ -14,14 +14,16 @@ import {StoreProps} from '../../ts/interfaces';
 interface Props {
     products: ProductType[] | null;
     style?: StyleProp<ViewStyle>;
-    headerComponentType?: 'categories';
+    headerComponentType?: 'categories' | 'search-only';
+    ref?: Ref<FlatList> | null;
+    isHomeScreen?: boolean;
 }
 
-const ProductsList = ({products, style, headerComponentType}: Props) => {
+const ProductsList: React.FC<Props> = React.forwardRef(({products, style, headerComponentType, isHomeScreen}, ref) => {
     const [isRefreshing, setIsRefreshing] = useState(false);
     const {activeTheme} = useSelector((state: StoreProps) => state.theme);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProp<MainStackParamList>>();
     const dispatch = useDispatch();
     const {t} = useTranslation();
 
@@ -40,40 +42,43 @@ const ProductsList = ({products, style, headerComponentType}: Props) => {
     const listHeaderHandler = () => {
         switch (headerComponentType) {
             case 'categories':
-                return <CategoriesBar />;
+                return <ProductsListHeader ref={ref} isHomeScreen={isHomeScreen} />;
+            case 'search-only':
+                return <ProductsListHeader searchOnly ref={ref} isHomeScreen={isHomeScreen} />;
             default:
                 return null;
         }
     };
     return (
         <>
-            {products && products.length > 0 ? (
-                <FlatList
-                    data={products}
-                    style={[styles.productsList, style ? style : null]}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={isRefreshing}
-                            tintColor={activeTheme.dark ? activeTheme.colors.loadingSpinner : undefined}
-                            onRefresh={refreshHandler}
-                        />
-                    }
-                    ListHeaderComponent={listHeaderHandler()}
-                    renderItem={productData => (
-                        <ProductsListItem
-                            key={productData.item.id}
-                            product={productData.item}
-                            firstItem={productData.index === 0}
-                            onPress={() => openProduct(productData.item)}
-                        />
-                    )}
-                />
-            ) : (
-                <Text style={styles.emptyText}>{t('products.empty')}</Text>
-            )}
+            <FlatList
+                data={products}
+                style={[styles.productsList, style ? style : null]}
+                ref={ref}
+                onScrollBeginDrag={() => Keyboard.dismiss()}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={isRefreshing}
+                        tintColor={activeTheme.dark ? activeTheme.colors.loadingSpinner : undefined}
+                        onRefresh={refreshHandler}
+                    />
+                }
+                stickyHeaderIndices={[0]}
+                ListHeaderComponent={listHeaderHandler()}
+                ListEmptyComponent={<Text style={styles.emptyText}>{t('products.empty')}</Text>}
+                renderItem={productData => (
+                    <ProductsListItem
+                        key={productData.item.id}
+                        product={productData.item}
+                        firstItem={productData.index === 0}
+                        lastItem={products ? productData.index === products.length - 1 : false}
+                        onPress={() => openProduct(productData.item)}
+                    />
+                )}
+            />
         </>
     );
-};
+});
 
 export default ProductsList;
 

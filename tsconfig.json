@@ -15,6 +15,7 @@
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["./assets/*"],
+      "@utils/*" : ["./utils/*"]
     },
     "typeRoots": ["./src/@types"]
   },

@@ -1,9 +1,9 @@
 import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import {globalStyles} from '../../../styles/global';
 import Text from '../../ui/Text';
 import {m} from '../../../utils/style-helpers';
-import {DEFAULT_MARGINS, OPACITIES, RADIUSES} from '../../../constants/style';
+import {DEFAULT_OFFSETS, OPACITIES, RADIUSES} from '../../../constants/style';
 import {useSelector} from 'react-redux';
 import {StoreProps} from '../../../ts/interfaces';
 
@@ -35,8 +35,8 @@ export default OneCategory;
 
 const styles = StyleSheet.create({
     category: {
-        paddingHorizontal: DEFAULT_MARGINS.large,
-        ...m('medium'),
+        paddingHorizontal: DEFAULT_OFFSETS.large,
+        ...m('small'),
         marginBottom: 0,
         borderRadius: RADIUSES.large,
         height: 34,

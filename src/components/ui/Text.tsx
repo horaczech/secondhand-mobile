@@ -9,7 +9,7 @@ interface Props extends TextProps {
     className?: TextClassNameType;
 }
 
-const Text = (props: Props) => {
+const Text: React.FC<Props> = props => {
     const {children, style, className} = props;
     const {activeTheme} = useSelector((state: StoreProps) => state.theme);
     return (

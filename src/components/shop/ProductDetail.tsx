@@ -12,21 +12,24 @@ import LinearGradient from 'react-native-linear-gradient';
 import BackIcon from '@assets/images/back.svg';
 import ShareIcon from '@assets/images/share.svg';
 import IconButton from '../ui/IconButton';
-import {DEFAULT_MARGINS} from '../../constants/style';
+import {DEFAULT_OFFSETS} from '../../constants/style';
 import {useNavigation} from '@react-navigation/native';
-// @ts-ignore
-import {APP_URL} from 'react-native-dotenv';
 import {isValidUri, productUrl, share} from '../../utils/network';
+import {getCategoryById} from '../../utils/product';
+import {useTranslation} from 'react-i18next';
 
 interface Props {
     product: ProductType;
 }
 
-const ProductDetail = ({product}: Props) => {
+const ProductDetail: React.FC<Props> = ({product}) => {
     const {activeTheme} = useSelector((state: StoreProps) => state.theme);
+    const {allCategories} = useSelector((state: StoreProps) => state.categories);
+
     const [isRefreshing, setIsRefreshing] = useState(false);
 
     const navigation = useNavigation();
+    const {i18n} = useTranslation();
 
     const refreshHandler = () => {
         setIsRefreshing(true);
@@ -35,18 +38,24 @@ const ProductDetail = ({product}: Props) => {
         }, 200);
     };
 
+    const category = getCategoryById(product.category, allCategories);
+
+    const shareMessage = () => {
+        return `${product.title} ${category ? `- ${category.title[i18n.language]} ` : ''}| Secondhand`;
+    };
+
     const shareHandler = async () => {
-        await share({message: product.title, url: productUrl({id: product.id, slug: product.slug})});
+        await share({message: shareMessage(), url: productUrl({id: product.id, slug: product.slug})});
     };
 
     return (
         <ScrollView refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refreshHandler} />}>
             <IconButton
-                style={[styles.headerButton, {left: DEFAULT_MARGINS.large}]}
+                style={[styles.headerButton, {left: DEFAULT_OFFSETS.large}]}
                 onPress={() => navigation.goBack()}>
                 <BackIcon width={24} height={24} stroke={activeTheme.colors.text} />
             </IconButton>
-            <IconButton style={[styles.headerButton, {right: DEFAULT_MARGINS.large}]} onPress={() => shareHandler()}>
+            <IconButton style={[styles.headerButton, {right: DEFAULT_OFFSETS.large}]} onPress={() => shareHandler()}>
                 <ShareIcon width={24} height={24} fill={activeTheme.colors.text} />
             </IconButton>
             {isValidUri(product.image) ? (
@@ -102,6 +111,6 @@ const styles = StyleSheet.create({
         top: 50,
     },
     userInfo: {
-        paddingTop: DEFAULT_MARGINS.large,
+        paddingTop: DEFAULT_OFFSETS.large,
     },
 });

@@ -1,12 +1,14 @@
 {
     "general": {
-        "back": "Back"
+        "back": "Back",
+        "search": "Search"
     },
     "bottom_tabs": {
         "home": "Home",
         "search": "Search"
     },
     "products": {
-        "empty": "Nothing found"
+        "empty": "Nothing found",
+        "author": "Author"
     }
 }

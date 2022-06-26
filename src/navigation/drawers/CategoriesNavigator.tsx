@@ -4,7 +4,7 @@ import CategoryScreen from '../../screens/CategoryScreen';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
-const CategoriesNavigator = () => {
+const CategoriesNavigator: React.FC = () => {
     return (
         <Navigator>
             <Screen name="CategoryScreen" component={CategoryScreen} />

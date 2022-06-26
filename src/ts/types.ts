@@ -3,8 +3,9 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 export type MainStackParamList = {
     HomeScreen: undefined;
-    CategoriesScreen: {categoryId: number};
+    CategoryScreen: {categoryId: number};
     ProductDetailScreen: {productId: number};
+    ProfileScreen: {userId: number};
 };
 
 export type ThemeType = 'light' | 'dark';
@@ -16,11 +17,11 @@ export type ActiveThemeType = {
 
 export type MarginType = number | string;
 
-export type DefaultMarginsArgType = 'small' | 'medium' | 'large' | 'xxl';
+export type DefaultMarginsArgType = 'small' | 'medium' | 'large' | 'xl';
 
 export type MarginHelpersValueType = DefaultMarginsArgType | MarginType;
 
-export type DefaultMarginsType = {
+export type DefaultOffsetsType = {
     [key in DefaultMarginsArgType]: number;
 };
 
@@ -37,6 +38,12 @@ export type ProductType = {
     description: string;
     image: string;
     category: number;
+    user: {
+        name: string;
+        username: string;
+        id: number;
+        image: string;
+    };
 };
 
 export type CategoryType = {
@@ -46,11 +53,6 @@ export type CategoryType = {
         [x: string]: string;
     };
 };
-
-export type MainScreenProps = CompositeScreenProps<
-    StackScreenProps<MainStackParamList, 'HomeScreen'>,
-    StackScreenProps<MainStackParamList, 'ProductDetailScreen'>
->;
 
 export type ThemeColorsType = {
     primary: string;
@@ -74,4 +76,10 @@ export type ErrorType = null | string;
 export type NavigatorParamList = {
     MainStack: undefined;
     SearchStack: undefined;
+};
+
+export type ActiveProfile = {
+    id: number;
+    name: string;
+    image: string;
 };

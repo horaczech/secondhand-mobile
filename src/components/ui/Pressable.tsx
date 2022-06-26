@@ -6,7 +6,7 @@ interface Props extends PressableProps {
     style?: StyleProp<ViewStyle>;
 }
 
-const Pressable = ({onPress, style, children}: Props) => {
+const Pressable: React.FC<Props> = ({onPress, style, children}) => {
     return (
         <DefaultPressable
             style={({pressed}) => [pressed ? {opacity: OPACITIES.pressable} : null, style || null]}

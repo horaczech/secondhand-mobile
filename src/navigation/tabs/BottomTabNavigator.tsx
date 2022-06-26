@@ -11,7 +11,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {Navigator, Screen} = createBottomTabNavigator<NavigatorParamList>();
 
-const BottomTabNavigator = () => {
+const BottomTabNavigator: React.FC = () => {
     const {activeTheme} = useSelector((state: StoreProps) => state.theme);
     const inset = useSafeAreaInsets();
     const {t} = useTranslation();
@@ -27,7 +27,7 @@ const BottomTabNavigator = () => {
             backgroundColor: activeTheme.colors.background,
             borderTopColor: activeTheme.colors.separator,
             borderTopWidth: 1,
-            height: 60 + inset.bottom,
+            height: 50 + inset.bottom,
         },
     };
     return (
@@ -39,8 +39,8 @@ const BottomTabNavigator = () => {
                     options={{
                         tabBarIcon: ({focused}) => (
                             <HomeIcon
-                                width={24}
-                                height={24}
+                                width={20}
+                                height={20}
                                 stroke={focused ? activeTheme.colors.primary : activeTheme.colors.bottomIcon}
                             />
                         ),
@@ -53,8 +53,8 @@ const BottomTabNavigator = () => {
                     options={{
                         tabBarIcon: ({focused}) => (
                             <SearchIcon
-                                width={24}
-                                height={24}
+                                width={20}
+                                height={20}
                                 stroke={focused ? activeTheme.colors.primary : activeTheme.colors.bottomIcon}
                             />
                         ),

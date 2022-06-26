@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ThemeStateProps} from '../ts/interfaces';
-import {ThemeType} from '../ts/types';
 import {COLORS, DARK_COLORS} from '../constants/Colors';
 import {setTheme} from '../utils/user';
 

@@ -11,7 +11,7 @@ interface Props extends PressableProps {
     style?: StyleProp<ViewStyle>;
 }
 
-const IconButton = ({children, ...otherProps}: Props) => {
+const IconButton: React.FC<Props> = ({children, ...otherProps}) => {
     const {activeTheme} = useSelector((state: StoreProps) => state.theme);
 
     return (

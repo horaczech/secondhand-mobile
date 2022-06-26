@@ -1,5 +1,5 @@
 import {ActiveThemeType, MarginHelpersValueType, MarginSidesType, TextClassNameType} from '../ts/types';
-import {DEFAULT_MARGINS} from '../constants/style';
+import {DEFAULT_OFFSETS} from '../constants/style';
 import {globalStyles} from '../styles/global';
 
 export const handleSide = (side?: MarginSidesType) => {
@@ -23,10 +23,10 @@ export const handleSide = (side?: MarginSidesType) => {
 
 export const m = (value: MarginHelpersValueType, side?: MarginSidesType) => {
     let styleKey = handleSide(side);
-    if (typeof value !== 'number' && Object.keys(DEFAULT_MARGINS).indexOf(value) !== -1) {
-        const nth = Object.keys(DEFAULT_MARGINS).indexOf(value);
+    if (typeof value !== 'number' && Object.keys(DEFAULT_OFFSETS).indexOf(value) !== -1) {
+        const nth = Object.keys(DEFAULT_OFFSETS).indexOf(value);
         return {
-            [styleKey]: Object.values(DEFAULT_MARGINS)[nth],
+            [styleKey]: Object.values(DEFAULT_OFFSETS)[nth],
         };
     }
     return {[styleKey]: value};
